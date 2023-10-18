@@ -160,8 +160,9 @@ class ProjectController extends Controller{
 
   public function destroy($slug){
     $project = Project::where("slug", $slug)->firstOrFail();
-    $project->delete();
+    $project->technologies()->detach();
     Storage::delete($project->thumb);
+    $project->delete();
     return redirect()->route("admin.projects.index");
   }
 }
