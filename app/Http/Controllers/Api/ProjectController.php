@@ -9,12 +9,12 @@ use Illuminate\Http\Request;
 class ProjectController extends Controller
 {
   public function index(){
-    $project = Project::with(['techonologies', 'type'])->paginate(6);
-    return response()->json($project);
+    $projects = Project::with(['technologies', 'type'])->paginate(6);
+    return response()->json($projects);
   }
 
   public function show($slug){
-    $project = Project::where("slug", $slug)->with(['techonologies', 'type'])->firstOrFail();
+    $project = Project::where("slug", $slug)->with(['technologies', 'type'])->first();
     return response()->json($project);
   }
 }
